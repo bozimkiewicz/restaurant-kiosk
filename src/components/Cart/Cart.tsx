@@ -1,8 +1,10 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import ICartProducts from "../../interfaces/ICartProducts";
+import { decrementAmount, incrementAmount } from "../../slices/CartSlice";
 
 const Cart = () => {
+  const dispatch = useDispatch();
   const cartContent =
     useSelector<{ cart: Array<ICartProducts> }, Array<ICartProducts>>(
       (state) => state.cart
@@ -25,6 +27,16 @@ const Cart = () => {
             {item.product.name} x{item.amount}, kwota:{" "}
             {item.amount * item.product.price} zł
           </h2>
+          <button
+            onClick={() => dispatch(decrementAmount(item))}
+          >
+            -
+          </button>
+          <button
+            onClick={() => dispatch(incrementAmount(item))}
+          >
+            +
+          </button>
         </li>
       ))}
     </ul>
