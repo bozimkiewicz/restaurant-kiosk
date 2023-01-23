@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import Product from "./Product";
 import IProduct from "../../interfaces/IProduct";
+import ProductCategories from "./ProductCategories";
 
 const Products = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
+  const [currentCategory, setCurrentCategory] = useState<string>()
 
-  const fetchProducts = () => {
-    fetch(`http://localhost:3000/products/all`, {
+  const fetchProducts = (category: string) => {
+    fetch(`http://localhost:3000/products/${category}`, {
       method: 'GET',
     })
       .then(response => response.json())
@@ -17,11 +19,17 @@ const Products = () => {
   }
 
   useEffect(() => {
-    fetchProducts()
+    handleCategoryChange('polecane')
   }, []);
+
+  const handleCategoryChange = (value: string) => {
+    setCurrentCategory(value);
+    fetchProducts(value)
+  };
 
   return (
     <div>
+      <ProductCategories handleCategoryChange={handleCategoryChange} category={currentCategory!} />
       <ul>
         {products.map((product) => 
           <Product key={product.id} product={product} />)}
