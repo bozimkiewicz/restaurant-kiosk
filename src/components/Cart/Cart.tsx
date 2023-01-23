@@ -24,12 +24,20 @@ const Cart = () => {
   const listedCartContent = (
     <ul>
       {cartContent.map((item) => (
-        <li key={item.product.id}>
+        <li
+          className="py-5 border-solid border-b-2 border-b-my-orange-300"
+          key={item.product.id}
+        >
           <h2>
             {item.product.name} x{item.amount}, kwota:{" "}
             {item.amount * item.product.price} zł
           </h2>
-          <button onClick={() => dispatch(decrementAmount(item))}>-</button>
+          <button
+            className="mr-1"
+            onClick={() => dispatch(decrementAmount(item))}
+          >
+            -
+          </button>
           <button onClick={() => dispatch(incrementAmount(item))}>+</button>
         </li>
       ))}
@@ -37,13 +45,13 @@ const Cart = () => {
   );
 
   return (
-    <div>
+    <div className="pl-5 border-solid border-l-2 border-l-my-orange-300">
       <h2>Koszyk</h2>
       {listedCartContent}
       <div>Całkowita kwota: {cartItemsTotal.toFixed(2)} zł</div>
-      <div>
+      <div className="flex justify-between">
         <button onClick={() => dispatch(removeItems())}>Usuń zamówienie</button>
-        <button>Przejdź do płatności</button>
+        <button className="ml-5">Przejdź do płatności</button>
       </div>
     </div>
   );

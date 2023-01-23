@@ -28,7 +28,7 @@ const Products = () => {
   };
 
   return (
-    <div>
+    <div  className="mx-5">
       <ProductCategories handleCategoryChange={handleCategoryChange} category={currentCategory!} />
       <ul>
         {products.map((product) => 

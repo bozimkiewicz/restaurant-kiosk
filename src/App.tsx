@@ -6,7 +6,7 @@ import OrderMethod from './components/OrderMethod';
 
 function App() {
   return (
-    <div>
+    <div className='p-5 bg-yellow-50 shadow-md text-black rounded-md'>
       <header>
         <h1>Kiosk restauracyjny</h1>
       </header>

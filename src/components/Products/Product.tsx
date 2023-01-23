@@ -6,7 +6,7 @@ const Product = (props: { product: IProduct }) => {
   const dispatch = useDispatch();
 
   return (
-    <li>
+    <li className="py-1">
       <div>
         <button
           onClick={(e) => {
