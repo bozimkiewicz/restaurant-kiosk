@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
+import Products from './Products/Products';
 
 const Home = () => {
   return (
     <div>
-      Home
+      <Products />
       <div>
         <Link to="/order-method">
           <button>Cofnij</button>
