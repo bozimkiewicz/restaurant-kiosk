@@ -44,4 +44,21 @@ productsRouter.get("/:category", (req, res) => {
     .catch((error) => console.log(error));
 });
 
+productsRouter.get("/ingredients/all", (req, res) => {
+  const session = driver.session();
+  session
+    .run("MATCH (n:Ingredients) RETURN n")
+    .then((data) => {
+      const ingredients = data.records.map(
+        (ingredient) => ingredient._fields[0].properties
+      );
+      res.send(ingredients);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send({ message: "Internal server error" });
+    })
+    .then(() => session.close());
+});
+
 module.exports = productsRouter;
