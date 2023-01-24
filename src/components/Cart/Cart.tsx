@@ -10,6 +10,16 @@ import ProductCustomizer from "../Products/ProductCustomizer";
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const [customizerIsShown, setCustomizerIsShown] = useState(false);
+
+  const handleOnShow = () => {
+    setCustomizerIsShown(true);
+  };
+
+  const handleOnClose = () => {
+    setCustomizerIsShown(false);
+  };
+
   const cartContent =
     useSelector<{ cart: Array<ICartProducts> }, Array<ICartProducts>>(
       (state) => state.cart
@@ -40,7 +50,20 @@ const Cart = () => {
             -
           </button>
           <button onClick={() => dispatch(incrementAmount(item))}>+</button>
-          <ProductCustomizer product={item.product} />
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              return handleOnShow();
+            }}
+          >
+            Dostosuj
+          </button>
+          {customizerIsShown && (
+            <ProductCustomizer
+              product={item.product}
+              onClose={() => handleOnClose()}
+            />
+          )}
         </li>
       ))}
     </ul>

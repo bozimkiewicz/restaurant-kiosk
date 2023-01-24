@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import IProduct from "../../interfaces/IProduct";
 import IIngredient from "../../interfaces/IIngredient";
+import Modal from "../../UI/Modal";
 
 const ProductCustomizer = (props: {
   product: IProduct;
+  onClose: React.MouseEventHandler;
 }) => {
   const [ingredients, setIngredients] = useState<IIngredient[]>([]);
   const [productIngredients, setProductIngredients] = useState<IIngredient[]>(
@@ -38,7 +40,7 @@ const ProductCustomizer = (props: {
   }, []);
 
   return (
-    <div>
+    <Modal onClose={props.onClose}>
       <h1>Wybierz składniki</h1>
       <div>
         <div>
@@ -63,9 +65,10 @@ const ProductCustomizer = (props: {
         </div>
       </div>
       <div>
+        <button onClick={props.onClose}>Zamknij</button>
         <button>Dodaj do zamówienia</button>
       </div>
-    </div>
+    </Modal>
   );
 };
 
