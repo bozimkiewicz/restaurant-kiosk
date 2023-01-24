@@ -1,14 +1,15 @@
 import { PropsWithChildren } from "react";
 import ReactDOM from "react-dom";
 import IOnClose from "../interfaces/IOnClose";
+import "./Modal.css"
 
 const Backdrop = (props: IOnClose) => {
-  return <div onClick={props.onClose} />;
+  return <div className="backdrop" onClick={props.onClose} />;
 };
 
 const ModalOverlay = (props: PropsWithChildren<IOnClose>) => {
   return (
-    <div>
+    <div className="modal">
       <div>{props.children}</div>
     </div>
   );

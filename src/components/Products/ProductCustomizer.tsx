@@ -41,30 +41,34 @@ const ProductCustomizer = (props: {
 
   return (
     <Modal onClose={props.onClose}>
-      <h1>Wybierz składniki</h1>
-      <div>
-        <div>
+      <h1 className="flex justify-center mb-5">Wybierz składniki</h1>
+      <div className="flex h-96 overflow-y-auto">
+        <div className="w-1/2 p-1">
           <h4>Dostępne składniki:</h4>
-          <ul>
+          <ul className="p-0.5">
             {ingredients.map((item) => (
-              <button key={item.id} onClick={() => handleMoveItems(item)}>
+              <button className="m-1" key={item.id} onClick={() => handleMoveItems(item)}>
                 {item.name}
               </button>
             ))}
           </ul>
         </div>
-        <div>
-          <h4>Składniki w produkcie:</h4>
+        <div className="w-1/2 pl-6">
+          <h4 className="mb-1">Składniki w produkcie:</h4>
           <ul>
             {productIngredients.map((item, idx) => (
-              <button key={idx} onClick={() => removeItems(idx)}>
+              <button
+                className="m-1 shadow-sm shadow-gray-300 hover:shadow-lg"
+                key={idx}
+                onClick={() => removeItems(idx)}
+              >
                 {item.name}
               </button>
             ))}
           </ul>
         </div>
       </div>
-      <div>
+      <div className="flex justify-between mt-3">
         <button onClick={props.onClose}>Zamknij</button>
         <button>Dodaj do zamówienia</button>
       </div>
