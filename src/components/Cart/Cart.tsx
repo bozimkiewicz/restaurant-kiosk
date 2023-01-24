@@ -6,6 +6,7 @@ import {
   incrementAmount,
   removeItems,
 } from "../../slices/CartSlice";
+import ProductCustomizer from "../Products/ProductCustomizer";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ const Cart = () => {
             -
           </button>
           <button onClick={() => dispatch(incrementAmount(item))}>+</button>
+          <ProductCustomizer product={item.product} />
         </li>
       ))}
     </ul>

@@ -13,7 +13,7 @@ const cartSlice = createSlice({
       if (itemExists >= 0) {
         state[itemExists] = {
           product: newItem.product,
-          amount: state[itemExists].amount + newItem.amount,
+          amount: state[itemExists].amount + 1,
         };
       } else {
         state.push(newItem);
