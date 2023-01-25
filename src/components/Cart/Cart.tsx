@@ -53,6 +53,7 @@ const Cart = () => {
           </button>
           <button onClick={() => dispatch(incrementAmount(item))}>+</button>
           <button
+            className="ml-5"
             onClick={(e) => {
               e.preventDefault();
               return handleOnShow();
