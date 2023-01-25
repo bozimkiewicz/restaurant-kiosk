@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import IProduct from "../../interfaces/IProduct";
 import IIngredient from "../../interfaces/IIngredient";
 import Modal from "../../UI/Modal";
+import { useDispatch } from "react-redux";
+import { addCustomToCart, decrementAmount } from "../../slices/CartSlice";
 
 const ProductCustomizer = (props: {
   product: IProduct;
@@ -11,6 +13,8 @@ const ProductCustomizer = (props: {
   const [productIngredients, setProductIngredients] = useState<IIngredient[]>(
     []
   );
+
+  const dispatch = useDispatch()
 
   const fetchProductIngredients = () => {
     fetch(`http://localhost:3000/products/${props.product.id}/ingredients`, {
@@ -23,6 +27,12 @@ const ProductCustomizer = (props: {
       })
       .catch((error) => console.log(error));
   };
+
+  const updateCart = (e: React.MouseEvent) => {
+    dispatch(addCustomToCart({...props.product, ingredients: productIngredients}))
+    dispatch(decrementAmount({product: props.product}))
+    props.onClose(e)
+  }
 
   const handleMoveItems = (item: IIngredient) => {
     setProductIngredients([...productIngredients, item]);
@@ -70,7 +80,7 @@ const ProductCustomizer = (props: {
       </div>
       <div className="flex justify-between mt-3">
         <button onClick={props.onClose}>Zamknij</button>
-        <button>Dodaj do zamówienia</button>
+        <button onClick={(e) => updateCart(e)}>Dodaj do zamówienia</button>
       </div>
     </Modal>
   );

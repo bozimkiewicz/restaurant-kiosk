@@ -14,10 +14,18 @@ const cartSlice = createSlice({
         state[itemExists] = {
           product: newItem.product,
           amount: state[itemExists].amount + 1,
+          isCustom: false
         };
       } else {
         state.push(newItem);
       }
+    },
+    addCustomToCart: (state, action) => {
+      let newItem = action.payload;
+      newItem.id += 10000
+      newItem.name = '(modyfikacja) ' + newItem.name
+      const newProduct = {product: newItem, amount: 1, isCustom: true}
+      state.push(newProduct);
     },
     incrementAmount: (state, action) => {
       const item = action.payload.product;
@@ -39,6 +47,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, incrementAmount, decrementAmount, removeItems } = cartSlice.actions;
+export const { addToCart, addCustomToCart, incrementAmount, decrementAmount, removeItems } = cartSlice.actions;
 
 export default cartSlice;

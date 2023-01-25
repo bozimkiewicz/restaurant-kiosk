@@ -3,6 +3,7 @@ import './App.css'
 import Greetings from './components/Greetings';
 import Home from './components/Home';
 import OrderMethod from './components/OrderMethod';
+import Payment from './components/Payment/Payment';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Greetings />}></Route>
         <Route path="/order-method" element={<OrderMethod />}></Route>
         <Route path="/home" element={<Home />}></Route>
+        <Route path="/payment" element={<Payment />}></Route>
       </Routes> 
     </div>
   );

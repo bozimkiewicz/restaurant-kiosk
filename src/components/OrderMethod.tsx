@@ -1,14 +1,19 @@
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { setTakeIn, setTakeaway } from '../slices/OrderSlice';
+
 
 const OrderMethod = () => {
+  const dispatch = useDispatch()
+  
   return (
     <div>
       <h1>Wybierz sposób składania zamówienia!</h1>
       <Link to={"/home"}>
-        <button>Na wynos</button>
+        <button onClick={() => dispatch(setTakeaway())}>Na wynos</button>
       </Link>
       <Link to={"/home"}>
-        <button>Na miejscu</button>
+        <button onClick={() => dispatch(setTakeIn())}>Na miejscu</button>
       </Link>
       <div>
         <Link to="/">
