@@ -1,16 +1,19 @@
-const driver = require("../controllers/driver.controller");
+const { driver } = require("../controllers/driver.controller");
 const express = require("express");
 
 const productsRouter = express.Router();
 
 productsRouter.get("/all", (req, res) => {
+  // check if new session can be created on each request
   const session = driver.session();
   session
     .run("MATCH (n:Products) RETURN n")
     .then((data) => {
+      // check if Neo4J elementID is needed
       const products = data.records.map(
         (product) => product._fields[0].properties
       );
+      // console.log(products)
       res.send(products);
     })
     .catch((error) => console.log(error));
@@ -30,6 +33,7 @@ productsRouter.get("/categories", (req, res) => {
 });
 
 productsRouter.get("/:category", (req, res) => {
+  // check if parameter exist, or is correct (SQL INJECTION)
   const session = driver.session();
   session
     .run(
@@ -91,6 +95,5 @@ productsRouter.get("/:product/ingredients", (req, res) => {
       res.status(500).send({ message: "Internal server Error" });
     });
 });
-
 
 module.exports = productsRouter;
