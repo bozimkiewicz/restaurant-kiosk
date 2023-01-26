@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import ICartProducts from "../../interfaces/ICartProducts";
-import ICustomProduct from "../../interfaces/ICustomProduct";
+import ICartProducts from "../interfaces/ICartProducts";
+import ICustomProduct from "../interfaces/ICustomProduct";
 import {
   decrementAmount,
   incrementAmount,
@@ -79,7 +79,9 @@ const Cart = () => {
       <div>Całkowita kwota: {cartItemsTotal.toFixed(2)} zł</div>
       <div className="flex justify-between">
         <button onClick={() => dispatch(removeItems())}>Usuń zamówienie</button>
-        <Link to="/payment"><button className="ml-5">Przejdź do płatności</button></Link>
+        <Link to="/payment">
+          <button className="ml-5">Przejdź do płatności</button>
+        </Link>
       </div>
     </div>
   );

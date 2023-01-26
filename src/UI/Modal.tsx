@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import ReactDOM from "react-dom";
-import IOnClose from "../interfaces/IOnClose";
+import IOnClose from "../components/interfaces/IOnClose";
 import "./Modal.css"
 
 const Backdrop = (props: IOnClose) => {

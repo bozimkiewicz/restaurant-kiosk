@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Product from "./Product";
-import IProduct from "../../interfaces/IProduct";
+import IProduct from "../interfaces/IProduct";
 import ProductCategories from "./ProductCategories";
 
 const Products = () => {
@@ -8,7 +8,7 @@ const Products = () => {
   const [currentCategory, setCurrentCategory] = useState<string>()
 
   const fetchProducts = (category: string) => {
-    fetch(`http://localhost:3000/products/${category}`, {
+    fetch(`http://localhost:3000/categories/${category}`, {
       method: 'GET',
     })
       .then(response => response.json())
@@ -28,10 +28,10 @@ const Products = () => {
   };
 
   return (
-    <div  className="mx-5">
+    <div className="mx-5">
       <ProductCategories handleCategoryChange={handleCategoryChange} category={currentCategory!} />
       <ul>
-        {products.map((product) => 
+        {products.map((product) =>
           <Product key={product.id} product={product} />)}
       </ul>
     </div>

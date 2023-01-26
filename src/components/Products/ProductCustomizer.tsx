@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import IProduct from "../../interfaces/IProduct";
-import IIngredient from "../../interfaces/IIngredient";
+import IProduct from "../interfaces/IProduct";
+import IIngredient from "../interfaces/IIngredient";
 import Modal from "../../UI/Modal";
 import { useDispatch } from "react-redux";
 import { addCustomToCart, decrementAmount } from "../../slices/CartSlice";
@@ -17,7 +17,7 @@ const ProductCustomizer = (props: {
   const dispatch = useDispatch()
 
   const fetchProductIngredients = () => {
-    fetch(`http://localhost:3000/products/${props.product.id}/ingredients`, {
+    fetch(`http://localhost:3000/ingredients/${props.product.id}`, {
       method: "GET",
     })
       .then((response) => response.json())
@@ -29,8 +29,8 @@ const ProductCustomizer = (props: {
   };
 
   const updateCart = (e: React.MouseEvent) => {
-    dispatch(addCustomToCart({...props.product, ingredients: productIngredients}))
-    dispatch(decrementAmount({product: props.product}))
+    dispatch(addCustomToCart({ ...props.product, ingredients: productIngredients }))
+    dispatch(decrementAmount({ product: props.product }))
     props.onClose(e)
   }
 

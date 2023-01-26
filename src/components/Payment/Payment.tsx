@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import ICartProducts from "../../interfaces/ICartProducts";
+import ICartProducts from "../interfaces/ICartProducts";
 
 const Payment = () => {
   const orderMethod = useSelector<
