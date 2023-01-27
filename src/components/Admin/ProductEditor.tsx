@@ -3,7 +3,7 @@ import IProduct from "../interfaces/IProduct";
 import ICategory from "../interfaces/ICategory";
 import IIngredient from "../interfaces/IIngredient";
 import IProductWithRel from "../interfaces/IProductWithRel";
-import ProductForm from "../AdminForm/ProductForm";
+import ProductForm from "./AdminForm/ProductForm";
 import { useSelector } from "react-redux";
 
 const ProductEditor = () => {

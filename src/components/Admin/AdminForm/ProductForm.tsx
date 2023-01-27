@@ -1,9 +1,9 @@
 import { Field, Form, Formik } from "formik";
 import { useSelector } from "react-redux";
-import ICategory from "../interfaces/ICategory";
-import IIngredient from "../interfaces/IIngredient";
-import IProduct from "../interfaces/IProduct";
-import IProductWithRel from "../interfaces/IProductWithRel";
+import ICategory from "../../interfaces/ICategory";
+import IIngredient from "../../interfaces/IIngredient";
+import IProduct from "../../interfaces/IProduct";
+import IProductWithRel from "../../interfaces/IProductWithRel";
 
 const ProductForm = (props: {
   product?: IProductWithRel;

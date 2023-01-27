@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router";
 import "./App.css";
 import ADMINPanel from "./components/Admin/ADMINPanel";
-import LoginForm from "./components/AdminForm/LoginForm";
-import LoginRoute from "./components/AdminForm/LoginRoute";
+import LoginForm from "./components/Admin/AdminForm/LoginForm";
+import LoginRoute from "./components/Admin/AdminForm/LoginRoute";
 import Greetings from "./components/Greetings";
 import Home from "./components/Home";
 import OrderMethod from "./components/OrderMethod";

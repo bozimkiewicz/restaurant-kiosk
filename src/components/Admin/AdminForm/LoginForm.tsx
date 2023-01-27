@@ -1,7 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { saveToken } from "../../slices/AuthSlice";
+import { saveToken } from "../../../slices/AuthSlice";
 
 interface FormValues {
   login: string;

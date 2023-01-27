@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import { useSelector } from "react-redux";
-import ICategory from "../interfaces/ICategory";
+import ICategory from "../../interfaces/ICategory";
 
 const CategoryForm = (props: {
   id?: number;

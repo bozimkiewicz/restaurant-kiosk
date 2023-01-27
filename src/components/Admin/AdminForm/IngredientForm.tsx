@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import { useSelector } from "react-redux";
-import IIngredient from "../interfaces/IIngredient";
+import IIngredient from "../../interfaces/IIngredient";
 
 const IngredientsForm = (props: {
   id?: number;

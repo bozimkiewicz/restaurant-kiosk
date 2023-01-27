@@ -1,6 +1,6 @@
 import ICategory from "../interfaces/ICategory";
 import { useState, useEffect } from "react";
-import CategoryForm from "../AdminForm/CategoryForm";
+import CategoryForm from "./AdminForm/CategoryForm";
 import { useSelector } from "react-redux";
 
 const CategoriesEditor = () => {

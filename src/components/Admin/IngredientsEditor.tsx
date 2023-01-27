@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import IIngredient from "../interfaces/IIngredient";
-import IngredientsForm from "../AdminForm/IngredientForm";
+import IngredientsForm from "./AdminForm/IngredientForm";
 import { useSelector } from "react-redux";
 
 const IngredientsEditor = () => {
