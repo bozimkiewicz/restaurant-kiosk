@@ -1,5 +1,6 @@
 const express = require("express");
 const { checkSchema } = require("express-validator");
+const { verifyToken } = require("../controllers/auth.controller");
 const {
   getCategoriesHandler,
   newCategoryHandler,
@@ -35,6 +36,7 @@ CategoryRouter.get(
 
 CategoryRouter.post(
   "/",
+  verifyToken,
   checkSchema(CategorySchema),
   resultValidator,
   newCategoryHandler
@@ -42,6 +44,7 @@ CategoryRouter.post(
 
 CategoryRouter.put(
   "/",
+  verifyToken,
   checkSchema(CategorySchema),
   resultValidator,
   updateCategoryHandler
@@ -49,6 +52,7 @@ CategoryRouter.put(
 
 CategoryRouter.delete(
   "/",
+  verifyToken,
   checkSchema(CategorySchema),
   resultValidator,
   deleteCategoryHandler

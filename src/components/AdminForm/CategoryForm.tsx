@@ -1,4 +1,5 @@
 import { Field, Form, Formik } from "formik";
+import { useSelector } from "react-redux";
 import ICategory from "../interfaces/ICategory";
 
 const CategoryForm = (props: {
@@ -6,10 +7,17 @@ const CategoryForm = (props: {
   name?: string;
   onChange: () => void;
 }) => {
+
+  const token =
+  useSelector<{ auth: {token: string}}, string>(
+    (state) => state.auth.token
+  ) || '';
+
   const updateCategory = async (values: ICategory) => {
     await fetch("http://localhost:3000/categories", {
       method: props.id !== undefined ? "PUT" : "POST",
       headers: {
+        Authorization: token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({

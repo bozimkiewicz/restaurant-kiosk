@@ -1,19 +1,16 @@
-import { createContext } from 'react';
-import { Routes, Route } from 'react-router';
-import './App.css'
-import ADMINPanel from './components/Admin/ADMINPanel';
-import LoginForm from './components/AdminForm/LoginForm';
-import LoginRoute from './components/AdminForm/LoginRoute';
-import Greetings from './components/Greetings';
-import Home from './components/Home';
-import OrderMethod from './components/OrderMethod';
-import Payment from './components/Payment/Payment';
-
-// const AuthContext = createContext()
+import { Routes, Route } from "react-router";
+import "./App.css";
+import ADMINPanel from "./components/Admin/ADMINPanel";
+import LoginForm from "./components/AdminForm/LoginForm";
+import LoginRoute from "./components/AdminForm/LoginRoute";
+import Greetings from "./components/Greetings";
+import Home from "./components/Home";
+import OrderMethod from "./components/OrderMethod";
+import Payment from "./components/Payment/Payment";
 
 function App() {
   return (
-    <div className='p-5 bg-yellow-50 shadow-md text-black rounded-md'>
+    <div className="p-5 bg-yellow-50 shadow-md text-black rounded-md">
       <header>
         <h1>Kiosk restauracyjny</h1>
       </header>
@@ -23,12 +20,12 @@ function App() {
         <Route path="/home" element={<Home />}></Route>
         <Route path="/payment" element={<Payment />}></Route>
         <Route path="/login" element={<LoginForm />}></Route>
-        <Route element={<LoginRoute/>}>
+        <Route element={<LoginRoute />}>
           <Route path="/crud/*" element={<ADMINPanel />}></Route>
         </Route>
-      </Routes> 
+      </Routes>
     </div>
   );
 }
 
-export default App
+export default App;

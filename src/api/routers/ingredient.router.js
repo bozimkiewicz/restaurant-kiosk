@@ -1,5 +1,6 @@
 const express = require("express");
 const { checkSchema } = require("express-validator");
+const { verifyToken } = require("../controllers/auth.controller");
 const {
   getIngredientsHandler,
   newIngredientHandler,
@@ -30,6 +31,7 @@ IngredientRouter.get(
 
 IngredientRouter.post(
   "/",
+  verifyToken,
   checkSchema(IngredientSchema),
   resultValidator,
   newIngredientHandler
@@ -37,6 +39,7 @@ IngredientRouter.post(
 
 IngredientRouter.put(
   "/",
+  verifyToken,
   checkSchema(IngredientSchema),
   resultValidator,
   updateIngredientHandler
@@ -44,6 +47,7 @@ IngredientRouter.put(
 
 IngredientRouter.delete(
   "/",
+  verifyToken,
   checkSchema(IngredientSchema),
   resultValidator,
   deleteIngredientHandler

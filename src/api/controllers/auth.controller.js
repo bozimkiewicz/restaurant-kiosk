@@ -39,7 +39,6 @@ const adminLogin = (req, res) => {
         res.status(404);
         throw new Error("Could not find a user");
       }
-      // console.log(records[0].get('a').properties.password)
       return records[0].get("a").properties.password;
     })
     .then((hash) => {

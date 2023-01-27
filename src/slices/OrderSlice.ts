@@ -6,11 +6,9 @@ const orderSlice = createSlice({
   reducers: {
     setTakeaway: (state) => {
       state.method = "na wynos";
-      console.log(state.method);
     },
     setTakeIn: (state) => {
       state.method = "na miejscu";
-      console.log(state.method);
     },
   },
 });

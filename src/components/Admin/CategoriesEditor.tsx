@@ -1,11 +1,17 @@
 import ICategory from "../interfaces/ICategory";
 import { useState, useEffect } from "react";
 import CategoryForm from "../AdminForm/CategoryForm";
+import { useSelector } from "react-redux";
 
 const CategoriesEditor = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [currentEditor, setCurrentEditor] = useState<number | null>(null);
 
+  const token =
+  useSelector<{ auth: {token: string}}, string>(
+    (state) => state.auth.token
+  ) || '';
+  
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -21,6 +27,7 @@ const CategoriesEditor = () => {
     fetch("http://localhost:3000/categories", {
       method: "DELETE",
       headers: {
+        Authorization: token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({

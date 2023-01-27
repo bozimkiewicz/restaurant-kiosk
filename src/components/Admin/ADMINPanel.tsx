@@ -29,9 +29,6 @@ const ADMINPanel = () => {
         <Link to="/crud/categories">
           <button className="ml-3">Kategorie</button>
         </Link>
-        <Link to="/crud/accounts">
-          <button className="ml-3">Konta administratora</button>
-        </Link>
       </div>
 
       <Routes>

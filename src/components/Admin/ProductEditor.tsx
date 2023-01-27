@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
 import IProduct from "../interfaces/IProduct";
 import ICategory from "../interfaces/ICategory";
-import { Field, Form, Formik } from "formik";
 import IIngredient from "../interfaces/IIngredient";
 import IProductWithRel from "../interfaces/IProductWithRel";
 import ProductForm from "../AdminForm/ProductForm";
+import { useSelector } from "react-redux";
 
 const ProductEditor = () => {
   const [products, setProducts] = useState<IProductWithRel[]>([]);
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [ingredients, setIngredients] = useState<IIngredient[]>([]);
   const [currentEditor, setCurrentEditor] = useState<number | null>(null);
+
+  const token =
+  useSelector<{ auth: {token: string}}, string>(
+    (state) => state.auth.token
+  ) || '';
 
   useEffect(() => {
     fetchProducts();
@@ -44,6 +49,7 @@ const ProductEditor = () => {
     fetch("http://localhost:3000/products", {
       method: "DELETE",
       headers: {
+        Authorization: token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({

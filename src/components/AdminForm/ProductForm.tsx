@@ -1,4 +1,5 @@
 import { Field, Form, Formik } from "formik";
+import { useSelector } from "react-redux";
 import ICategory from "../interfaces/ICategory";
 import IIngredient from "../interfaces/IIngredient";
 import IProduct from "../interfaces/IProduct";
@@ -12,6 +13,11 @@ const ProductForm = (props: {
     categories: ICategory[];
   };
 }) => {
+  const token =
+    useSelector<{ auth: { token: string } }, string>(
+      (state) => state.auth.token
+    ) || "";
+
   const updateProduct = (
     values: IProduct,
     ingredients: string[],
@@ -20,6 +26,7 @@ const ProductForm = (props: {
     fetch("http://localhost:3000/products", {
       method: props.product !== undefined ? "PUT" : "POST",
       headers: {
+        Authorization: token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -70,7 +77,7 @@ const ProductForm = (props: {
         }
       >
         {({ errors, touched }) => (
-          <Form >
+          <Form>
             <div className="mb-4 inline-block">
               <label htmlFor="name">Nazwa: </label>
               <Field

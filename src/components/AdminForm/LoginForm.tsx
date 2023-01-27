@@ -1,6 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { saveToken } from "../../slices/AuthSlice";
 
 interface FormValues {
   login: string;
@@ -9,6 +10,7 @@ interface FormValues {
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <div className="bg-white border-solid border-2 border-gray-100 rounded-md shadow-md p-5 mt-5">
@@ -41,7 +43,11 @@ const LoginForm = () => {
             })
               .then((response) => response.json())
               .then((data) => {
-                console.log(`${data.message}!\nAccessToken : ${data.accessToken}`);
+                console.log(
+                  `${data.message}!\nAccessToken : ${data.accessToken}`
+                );
+                dispatch(saveToken({token: data.accessToken}));
+                navigate("/crud")
               })
               .catch((err) => console.log(err));
           }}
@@ -62,7 +68,6 @@ const LoginForm = () => {
                 placeholder="Podaj hasło"
               />
               <ErrorMessage name="password" component="div" />
-              <Link to="crud"></Link>
               <button
                 className="flex justify-end bg-my-orange-100"
                 type="submit"

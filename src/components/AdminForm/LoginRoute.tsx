@@ -1,9 +1,15 @@
+import { useSelector } from "react-redux";
 import { Outlet, Navigate } from "react-router";
 
 const LoginRoute = () => {
-  let auth = { "token": true }
+
+  const token =
+  useSelector<{ auth: {token: string}}, string>(
+    (state) => state.auth.token
+  ) || '';
+
   return (
-    auth.token ? <Outlet /> : <Navigate to="/login" />
+    token ? <Outlet /> : <Navigate to="/login" />
   )
 }
 
