@@ -55,7 +55,7 @@ const CategoryForm = (props: {
           />
           {errors.nazwa && touched.nazwa && <div>{errors.nazwa}</div>}
           <button
-            className="bg-my-orange-100"
+            className="bg-my-orange-100 mt-2"
             type="submit"
             disabled={!!errors.nazwa}
           >

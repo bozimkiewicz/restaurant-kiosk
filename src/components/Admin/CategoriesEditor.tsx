@@ -50,7 +50,7 @@ const CategoriesEditor = () => {
         <ul>
           {categories.map((category, i) => (
             <li
-              className="bg-white p-2 m-2 shadow-md border-solid border-2 border-my-orange-300 rounded-md"
+              className="bg-white p-2 m-2 shadow-md rounded-md"
               key={i}
               onClick={() => setCurrentEditor(i)}
             >
