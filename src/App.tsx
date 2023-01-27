@@ -1,9 +1,15 @@
+import { createContext } from 'react';
 import { Routes, Route } from 'react-router';
 import './App.css'
+import ADMINPanel from './components/Admin/ADMINPanel';
+import LoginForm from './components/AdminForm/LoginForm';
+import LoginRoute from './components/AdminForm/LoginRoute';
 import Greetings from './components/Greetings';
 import Home from './components/Home';
 import OrderMethod from './components/OrderMethod';
 import Payment from './components/Payment/Payment';
+
+// const AuthContext = createContext()
 
 function App() {
   return (
@@ -16,6 +22,10 @@ function App() {
         <Route path="/order-method" element={<OrderMethod />}></Route>
         <Route path="/home" element={<Home />}></Route>
         <Route path="/payment" element={<Payment />}></Route>
+        <Route path="/login" element={<LoginForm />}></Route>
+        <Route element={<LoginRoute/>}>
+          <Route path="/crud/*" element={<ADMINPanel />}></Route>
+        </Route>
       </Routes> 
     </div>
   );
