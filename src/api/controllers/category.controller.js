@@ -31,10 +31,7 @@ const updateCategoryHandler = (req, res) => {
   sendQuery(
     query,
     (data) => res.send(data),
-    (err) => {
-      console.log(err);
-      internalErrorHandler(res);
-    }
+    (err) => internalErrorHandler(res)
   );
 };
 

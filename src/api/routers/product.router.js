@@ -1,67 +1,37 @@
-const express = require("express");
+const express = require('express');
 const { checkSchema } = require("express-validator");
-const resultValidator = require("../util/resultValidator");
-const {
-  ProductSchema,
-  ProductIDSchema,
-  ProductIngredientSchema,
-  ProductCategorySchema,
-} = require("../models/product.schema");
-const {
-  getProductsHandler,
-  newProductHandler,
-  updateProductHandler,
-  deleteProductHandler,
-  addProductIngredientHandler,
-  removeProductIngredientHandler,
-  setProductCategory,
-} = require("../controllers/product.controller");
+const resultValidator = require('../util/resultValidator');
+const { ProductSchema, ProductIDSchema, ProductIngredientSchema, ProductCategorySchema } = require("../models/product.schema");
+const { getProductsHandler, newProductHandler, updateProductHandler, deleteProductHandler, getProductsWithDataHandler } = require("../controllers/product.controller");
 
 const ProductsRouter = express.Router();
 
 //ProductsCRUDRouter.use(verifyToken)
 
-ProductsRouter.get("/", getProductsHandler);
+ProductsRouter.get('/',
+    getProductsHandler
+)
 
-ProductsRouter.post(
-  "/",
-  checkSchema(ProductSchema),
-  resultValidator,
-  newProductHandler
-);
+ProductsRouter.get('/all',
+    getProductsWithDataHandler
+)
 
-ProductsRouter.put(
-  "/",
-  checkSchema(ProductSchema),
-  resultValidator,
-  updateProductHandler
-);
+ProductsRouter.post('/',
+    checkSchema(ProductSchema),
+    resultValidator,
+    newProductHandler
+)
 
-ProductsRouter.delete(
-  "/",
-  checkSchema(ProductIDSchema),
-  resultValidator,
-  deleteProductHandler
-);
+ProductsRouter.put('/',
+    checkSchema(ProductSchema),
+    resultValidator,
+    updateProductHandler
+)
 
-// ProductsRouter.post('/category',
-//     checkSchema(ProductCategorySchema),
-//     resultValidator,
-//     setProductCategory
-// )
+ProductsRouter.delete('/',
+    checkSchema(ProductIDSchema),
+    resultValidator,
+    deleteProductHandler
+)
 
-ProductsRouter.post(
-  "/ingredients",
-  checkSchema(ProductIngredientSchema),
-  resultValidator,
-  addProductIngredientHandler
-);
-
-ProductsRouter.delete(
-  "/ingredients",
-  checkSchema(ProductIngredientSchema),
-  resultValidator,
-  removeProductIngredientHandler
-);
-
-module.exports = ProductsRouter;
+module.exports = ProductsRouter
