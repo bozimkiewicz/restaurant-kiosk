@@ -1,5 +1,6 @@
 const express = require("express");
 const { checkSchema } = require("express-validator");
+const { verifyToken } = require("../controllers/auth.controller");
 const {
   newOrderHandler,
   statDayHandler,
@@ -16,6 +17,7 @@ const OrderRouter = express.Router();
 
 OrderRouter.get(
   "/day/:year/:month/:day",
+  verifyToken,
   checkSchema(StatDaySchema),
   resultValidator,
   statDayHandler
@@ -23,6 +25,7 @@ OrderRouter.get(
 
 OrderRouter.get(
   "/month/:year/:month",
+  verifyToken,
   checkSchema(StatMonthSchema),
   resultValidator,
   statMonthHandler

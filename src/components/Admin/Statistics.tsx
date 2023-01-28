@@ -1,5 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 interface IStats {
   orders: number;
@@ -19,9 +20,9 @@ const Statistics = () => {
 
   return (
     <div>
-      <h4>Statistics</h4>
+      <h4>Statystyki</h4>
       <div>
-        <button onClick={() => setBy("day")}>Dzienne</button>
+        <button className="mr-3" onClick={() => setBy("day")}>Dzienne</button>
         <button onClick={() => setBy("month")}>Miesięczne</button>
       </div>
       {by === "day" && <DailyStats />}
@@ -38,13 +39,21 @@ const DailyStats = () => {
     day: number;
   } | null>(null);
 
+  const token =
+  useSelector<{ auth: {token: string}}, string>(
+    (state) => state.auth.token
+  ) || '';
+
   const fetchStats = (date: { day: number; month: number; year: number }) => {
     setDate(date);
     fetch(
       `http://localhost:3000/orders/day/${date.year}/${date.month}/${date.day}`,
       {
         method: "GET",
-      }
+        headers: {
+          Authorization: token,
+        },
+      },
     )
       .then((response) => response.json())
       .then((data) => setStats(data))
@@ -53,7 +62,7 @@ const DailyStats = () => {
 
   return (
     <div>
-      <h4>Daily</h4>
+      <h4>Dziennie</h4>
       <Formik
         initialValues={{
           day: 0,
@@ -63,19 +72,19 @@ const DailyStats = () => {
         onSubmit={(values) => fetchStats(values)}
       >
         <Form className="inline-block">
-          <label htmlFor="day">Day</label>
+          <label htmlFor="day">Dzień</label>
           <Field
             className="mb-3 text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             type="number"
             name="day"
           />
-          <label htmlFor="month">Month</label>
+          <label htmlFor="month">Miesiąc</label>
           <Field
             className="mb-3 text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             type="number"
             name="month"
           />
-          <label htmlFor="year">Year</label>
+          <label htmlFor="year">Rok</label>
           <Field
             className="mb-3 text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             type="number"
@@ -98,10 +107,18 @@ const MonthlyStats = () => {
     null
   );
 
+  const token =
+  useSelector<{ auth: {token: string}}, string>(
+    (state) => state.auth.token
+  ) || '';
+
   const fetchStats = (date: { month: number; year: number }) => {
     setDate(date);
     fetch(`http://localhost:3000/orders/month/${date.year}/${date.month}`, {
       method: "GET",
+      headers: {
+        Authorization: token,
+      },
     })
       .then((response) => response.json())
       .then((data) => setStats(data))
@@ -110,7 +127,7 @@ const MonthlyStats = () => {
 
   return (
     <div>
-      <h4>Monthly</h4>
+      <h4>Miesięcznie</h4>
       <Formik
         initialValues={{
           month: 0,
@@ -119,13 +136,13 @@ const MonthlyStats = () => {
         onSubmit={(values) => fetchStats(values)}
       >
         <Form className="inline-block">
-          <label htmlFor="month">Month</label>
+          <label htmlFor="month">Miesiąc</label>
           <Field
             className="mb-3 text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
             type="number"
             name="month"
           />
-          <label htmlFor="year">Year</label>
+          <label htmlFor="year">Rok</label>
           <Field
             className="mb-3 text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
             type="number"
