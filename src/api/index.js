@@ -13,7 +13,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// const productsRouter = require('./routers/productsRouter');
 const ProductRouter = require("./routers/product.router");
 const IngredientRouter = require("./routers/ingredient.router");
 const CategoryRouter = require("./routers/category.router");
