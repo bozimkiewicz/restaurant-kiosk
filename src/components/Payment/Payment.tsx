@@ -55,8 +55,6 @@ const Payment = () => {
     </ul>
   );
 
-  const order = { orderContent: cartContent, totalPrice: cartItemsTotal };
-
   return (
     <div>
       <div>
