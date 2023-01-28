@@ -36,7 +36,6 @@ const Payment = () => {
     })
       .then(response => response.json())
       .then(() => navigate('/'))
-      .then((data) => alert(JSON.stringify(data)))
       .catch(err => console.log(err))
   }
 
