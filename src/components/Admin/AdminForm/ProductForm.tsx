@@ -1,9 +1,9 @@
 import { Field, Form, Formik } from "formik";
-import { useSelector } from "react-redux";
 import ICategory from "../../interfaces/ICategory";
 import IIngredient from "../../interfaces/IIngredient";
 import IProduct from "../../interfaces/IProduct";
 import IProductWithRel from "../../interfaces/IProductWithRel";
+import { useKeycloak } from "@react-keycloak/web";
 
 const ProductForm = (props: {
   product?: IProductWithRel;
@@ -13,10 +13,7 @@ const ProductForm = (props: {
     categories: ICategory[];
   };
 }) => {
-  const token =
-    useSelector<{ auth: { token: string } }, string>(
-      (state) => state.auth.token
-    ) || "";
+  const { keycloak } = useKeycloak();
 
   const updateProduct = (
     values: IProduct,
@@ -26,7 +23,7 @@ const ProductForm = (props: {
     fetch("http://localhost:3000/products", {
       method: props.product !== undefined ? "PUT" : "POST",
       headers: {
-        Authorization: token,
+        Authorization: "Bearer " + keycloak.token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({

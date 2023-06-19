@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
 import IIngredient from "../interfaces/IIngredient";
 import IngredientsForm from "./AdminForm/IngredientForm";
-import { useSelector } from "react-redux";
+import { useKeycloak } from "@react-keycloak/web";
 
 const IngredientsEditor = () => {
   const [ingredients, setIngredients] = useState<IIngredient[]>([]);
   const [currentEditor, setCurrentEditor] = useState<number | null>(null);
 
-  const token =
-  useSelector<{ auth: {token: string}}, string>(
-    (state) => state.auth.token
-  ) || '';
+  const { keycloak } = useKeycloak();
 
   useEffect(() => {
     fetchIngredients();
@@ -27,7 +24,7 @@ const IngredientsEditor = () => {
     fetch("http://localhost:3000/ingredients", {
       method: "DELETE",
       headers: {
-        Authorization: token,
+        Authorization: "Bearer " + keycloak.token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({

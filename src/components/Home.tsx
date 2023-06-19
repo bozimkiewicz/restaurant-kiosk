@@ -1,14 +1,29 @@
 import { Link } from "react-router-dom";
 import Cart from "./Cart/Cart";
 import Products from "./Products/Products";
+import { useKeycloak } from "@react-keycloak/web";
 
 const Home = () => {
+  const { keycloak } = useKeycloak();
+
   return (
     <div>
       <div className="flex justify-end">
-        <Link to="/crud">
-          <button>Admin</button>
-        </Link>
+        {!keycloak.authenticated && (
+          <div>
+            <button onClick={() => keycloak.login()}>Login</button>
+          </div>
+          )
+        }
+        {!!keycloak.authenticated && (
+          <div>
+            <Link to="/crud">
+              <button className="ml-2">Admin Panel</button>
+            </Link>
+            <button className="ml-2" onClick={() => keycloak.logout()}>Logout</button>
+          </div>
+          )
+        }
         <Link to="/home">
           <button className="ml-2">Home</button>
         </Link>

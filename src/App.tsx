@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router";
 import "./App.css";
 import ADMINPanel from "./components/Admin/ADMINPanel";
-import LoginForm from "./components/Admin/AdminForm/LoginForm";
 import LoginRoute from "./components/Admin/AdminForm/LoginRoute";
 import Greetings from "./components/Greetings";
 import Home from "./components/Home";
@@ -19,7 +18,6 @@ function App() {
         <Route path="/order-method" element={<OrderMethod />}></Route>
         <Route path="/home" element={<Home />}></Route>
         <Route path="/payment" element={<Payment />}></Route>
-        <Route path="/login" element={<LoginForm />}></Route>
         <Route element={<LoginRoute />}>
           <Route path="/crud/*" element={<ADMINPanel />}></Route>
         </Route>

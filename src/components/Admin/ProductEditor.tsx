@@ -4,7 +4,7 @@ import ICategory from "../interfaces/ICategory";
 import IIngredient from "../interfaces/IIngredient";
 import IProductWithRel from "../interfaces/IProductWithRel";
 import ProductForm from "./AdminForm/ProductForm";
-import { useSelector } from "react-redux";
+import { useKeycloak } from "@react-keycloak/web";
 
 const ProductEditor = () => {
   const [products, setProducts] = useState<IProductWithRel[]>([]);
@@ -12,10 +12,7 @@ const ProductEditor = () => {
   const [ingredients, setIngredients] = useState<IIngredient[]>([]);
   const [currentEditor, setCurrentEditor] = useState<number | null>(null);
 
-  const token =
-  useSelector<{ auth: {token: string}}, string>(
-    (state) => state.auth.token
-  ) || '';
+  const { keycloak } = useKeycloak();
 
   useEffect(() => {
     fetchProducts();
@@ -49,7 +46,7 @@ const ProductEditor = () => {
     fetch("http://localhost:3000/products", {
       method: "DELETE",
       headers: {
-        Authorization: token,
+        Authorization: "Bearer " + keycloak.token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({

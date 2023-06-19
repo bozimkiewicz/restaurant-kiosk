@@ -1,23 +1,19 @@
 import { Field, Form, Formik } from "formik";
-import { useSelector } from "react-redux";
 import ICategory from "../../interfaces/ICategory";
+import { useKeycloak } from "@react-keycloak/web";
 
 const CategoryForm = (props: {
   id?: number;
   name?: string;
   onChange: () => void;
 }) => {
-
-  const token =
-  useSelector<{ auth: {token: string}}, string>(
-    (state) => state.auth.token
-  ) || '';
+  const { keycloak } = useKeycloak();
 
   const updateCategory = async (values: ICategory) => {
     await fetch("http://localhost:3000/categories", {
       method: props.id !== undefined ? "PUT" : "POST",
       headers: {
-        Authorization: token,
+        Authorization: "Bearer " + keycloak.token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({

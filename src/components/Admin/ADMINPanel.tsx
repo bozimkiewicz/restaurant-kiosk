@@ -1,16 +1,17 @@
 import { Link, Route, Routes } from "react-router-dom";
+import { useKeycloak } from "@react-keycloak/web";
 import CategoriesEditor from "./CategoriesEditor";
 import IngredientsEditor from "./IngredientsEditor";
 import ProductEditor from "./ProductEditor";
 import Statistics from "./Statistics";
 
 const ADMINPanel = () => {
+  const { keycloak } = useKeycloak();
+
   return (
     <div>
       <div className="flex justify-end">
-        <Link to="/crud">
-          <button>Admin</button>
-        </Link>
+        <button onClick={() => keycloak.logout()}>Logout</button>
         <Link to="/home">
           <button className="ml-2">Home</button>
         </Link>

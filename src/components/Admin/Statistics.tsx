@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useKeycloak } from "@react-keycloak/web";
 
 interface IStats {
   orders: number;
@@ -39,10 +39,7 @@ const DailyStats = () => {
     day: number;
   } | null>(null);
 
-  const token =
-  useSelector<{ auth: {token: string}}, string>(
-    (state) => state.auth.token
-  ) || '';
+  const { keycloak } = useKeycloak();
 
   const fetchStats = (date: { day: number; month: number; year: number }) => {
     setDate(date);
@@ -51,7 +48,7 @@ const DailyStats = () => {
       {
         method: "GET",
         headers: {
-          Authorization: token,
+        Authorization: "Bearer " + keycloak.token,
         },
       },
     )
@@ -107,17 +104,14 @@ const MonthlyStats = () => {
     null
   );
 
-  const token =
-  useSelector<{ auth: {token: string}}, string>(
-    (state) => state.auth.token
-  ) || '';
+  const { keycloak } = useKeycloak();
 
   const fetchStats = (date: { month: number; year: number }) => {
     setDate(date);
     fetch(`http://localhost:3000/orders/month/${date.year}/${date.month}`, {
       method: "GET",
       headers: {
-        Authorization: token,
+        Authorization: "Bearer " + keycloak.token,
       },
     })
       .then((response) => response.json())

@@ -1,22 +1,19 @@
 import { Field, Form, Formik } from "formik";
-import { useSelector } from "react-redux";
 import IIngredient from "../../interfaces/IIngredient";
+import { useKeycloak } from "@react-keycloak/web";
 
 const IngredientsForm = (props: {
   id?: number;
   name?: string;
   onChange: () => void;
 }) => {
-  const token =
-  useSelector<{ auth: {token: string}}, string>(
-    (state) => state.auth.token
-  ) || '';
+  const { keycloak } = useKeycloak();
 
   const updateIngredient = (values: IIngredient) => {
     fetch("http://localhost:3000/ingredients", {
       method: props.id !== undefined ? "PUT" : "POST",
       headers: {
-        Authorization: token,
+        Authorization: "Bearer " + keycloak.token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({

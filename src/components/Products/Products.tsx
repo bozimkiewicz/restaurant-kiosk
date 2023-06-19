@@ -19,7 +19,7 @@ const Products = () => {
   }
 
   useEffect(() => {
-    handleCategoryChange('polecane')
+    handleCategoryChange('Polecane')
   }, []);
 
   const handleCategoryChange = (value: string) => {
